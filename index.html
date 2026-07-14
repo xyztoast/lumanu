@@ -68,14 +68,14 @@
             flex-direction: column;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 80% 20%, rgba(94, 234, 212, 0.04) 0%, transparent 50%),
-                radial-gradient(circle at 10% 80%, rgba(94, 234, 212, 0.02) 0%, transparent 40%);
+                radial-gradient(circle at 80% 20%, rgba(94, 234, 212, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(94, 234, 212, 0.01) 0%, transparent 40%);
             background-attachment: fixed;
         }
 
         /* Container utility */
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 24px;
             width: 100%;
@@ -105,9 +105,9 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -123,7 +123,7 @@
         .btn-primary:hover {
             background-color: var(--accent);
             border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-muted);
+            box-shadow: 0 0 15px var(--accent-muted);
         }
 
         .btn-secondary {
@@ -135,19 +135,6 @@
         .btn-secondary:hover {
             border-color: var(--border-hover);
             background-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            font-family: var(--font-mono);
         }
 
         /* Header / Navbar */
@@ -179,7 +166,7 @@
         .logo {
             font-family: var(--font-sans);
             font-weight: 700;
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             color: var(--text);
             display: flex;
             align-items: center;
@@ -207,9 +194,9 @@
         }
 
         .status-indicator {
-            font-size: 0.8rem;
-            padding: 4px 10px;
-            border-radius: 9999px;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
             font-weight: 500;
             font-family: var(--font-mono);
             display: inline-flex;
@@ -220,81 +207,88 @@
         }
 
         .status-checking {
-            background-color: rgba(251, 191, 36, 0.1);
+            background-color: rgba(251, 191, 36, 0.06);
             color: var(--warning);
-            border-color: rgba(251, 191, 36, 0.2);
+            border-color: rgba(251, 191, 36, 0.15);
         }
 
         .status-reachable {
-            background-color: rgba(74, 222, 128, 0.1);
+            background-color: rgba(74, 222, 128, 0.06);
             color: var(--success);
-            border-color: rgba(74, 222, 128, 0.2);
+            border-color: rgba(74, 222, 128, 0.15);
         }
 
         .status-unreachable {
-            background-color: rgba(239, 68, 68, 0.1);
+            background-color: rgba(239, 68, 68, 0.06);
             color: var(--error);
-            border-color: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.15);
         }
 
         /* Hero Section */
         .hero {
-            padding: 80px 0 60px 0;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 48px;
-            align-items: center;
-        }
-
-        .hero-content {
+            padding: 80px 0 50px 0;
+            text-align: center;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
             gap: 24px;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
             color: var(--text);
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.15;
+            max-width: 800px;
         }
 
         .hero-title span {
             color: var(--accent);
             display: block;
             font-weight: 400;
-            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-            margin-top: 4px;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            margin-top: 8px;
         }
 
         .hero-description {
-            font-size: 1.15rem;
-            max-width: 520px;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .hero-actions {
             display: flex;
             gap: 12px;
+            justify-content: center;
             margin-top: 8px;
+        }
+
+        /* Simplified terminal preview under hero */
+        .hero-preview {
+            width: 100%;
+            max-width: 650px;
+            margin-top: 24px;
         }
 
         /* Terminal Window Component */
         .terminal {
             background-color: var(--card);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
             font-family: var(--font-mono);
             font-size: 0.85rem;
             display: flex;
             flex-direction: column;
+            text-align: left;
         }
 
         .terminal-header {
             background-color: rgba(0,0,0,0.15);
             border-bottom: 1px solid var(--border);
-            padding: 12px 16px;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -302,19 +296,15 @@
 
         .terminal-controls {
             display: flex;
-            gap: 6px;
+            gap: 5px;
         }
 
         .terminal-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background-color: var(--border);
         }
-
-        .terminal-dot:nth-child(1) { background-color: #ff5f56; }
-        .terminal-dot:nth-child(2) { background-color: #ffbd2e; }
-        .terminal-dot:nth-child(3) { background-color: #27c93f; }
 
         .terminal-title {
             color: var(--text-secondary);
@@ -322,15 +312,14 @@
         }
 
         .terminal-body {
-            padding: 18px;
+            padding: 16px;
             overflow-x: auto;
             color: #d1d5db;
             line-height: 1.5;
-            min-height: 220px;
         }
 
         .terminal-line {
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             white-space: pre;
         }
 
@@ -339,93 +328,67 @@
             user-select: none;
         }
 
-        .terminal-success {
-            color: var(--success);
-        }
-
         /* Features Section */
         .features {
-            padding: 80px 0;
+            padding: 60px 0;
             border-top: 1px solid var(--border);
         }
 
         .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-subtitle {
-            font-family: var(--font-mono);
-            color: var(--accent);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 12px;
-            display: block;
+            margin-bottom: 36px;
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: var(--text);
+            margin-bottom: 8px;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .feature-card {
             background-color: var(--card);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 32px;
+            border-radius: 6px;
+            padding: 24px;
             transition: all 0.2s ease;
         }
 
         .feature-card:hover {
             border-color: var(--border-hover);
-            transform: translateY(-2px);
-        }
-
-        .feature-icon {
-            color: var(--accent);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
         }
 
         .feature-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 8px;
             color: var(--text);
         }
 
         /* Live Playground Section */
         .playground {
-            padding: 80px 0;
+            padding: 60px 0;
             border-top: 1px solid var(--border);
-            background: linear-gradient(180deg, transparent, rgba(94, 234, 212, 0.015) 50%, transparent);
         }
 
         .playground-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            background-color: rgba(27, 29, 32, 0.6);
+            grid-template-columns: 1fr 1.2fr;
+            gap: 24px;
+            background-color: rgba(27, 29, 32, 0.4);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
+            border-radius: 8px;
+            padding: 24px;
         }
 
         .playground-controls {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-        }
-
-        .playground-description {
-            margin-bottom: 8px;
+            gap: 16px;
+            justify-content: center;
         }
 
         .input-group {
@@ -443,11 +406,11 @@
         .text-input {
             background-color: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 12px 16px;
+            border-radius: 4px;
+            padding: 10px 14px;
             color: var(--text);
             font-family: var(--font-sans);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
             transition: border-color 0.2s ease;
         }
@@ -459,10 +422,10 @@
         .format-selector {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 6px;
             background-color: var(--bg);
-            padding: 4px;
-            border-radius: 6px;
+            padding: 3px;
+            border-radius: 4px;
             border: 1px solid var(--border);
         }
 
@@ -471,9 +434,9 @@
             border: none;
             color: var(--text-secondary);
             font-family: var(--font-mono);
-            font-size: 0.8rem;
-            padding: 8px 12px;
-            border-radius: 4px;
+            font-size: 0.75rem;
+            padding: 6px;
+            border-radius: 3px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: center;
@@ -482,19 +445,17 @@
         .format-btn.active {
             background-color: var(--card);
             color: var(--accent);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
         .playground-btn {
             width: 100%;
-            margin-top: 12px;
         }
 
         .playground-output {
             display: flex;
             flex-direction: column;
             height: 100%;
-            min-height: 350px;
+            min-height: 280px;
         }
 
         .playground-output .terminal {
@@ -503,165 +464,81 @@
         }
 
         .playground-output .terminal-body {
-            position: relative;
             flex-grow: 1;
-        }
-
-        /* API Examples Section */
-        .api-examples {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .tabs {
-            display: flex;
-            gap: 4px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 24px;
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid transparent;
-            color: var(--text-secondary);
-            padding: 12px 24px;
-            cursor: pointer;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .tab-btn:hover {
-            color: var(--text);
-        }
-
-        .tab-btn.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
-        .code-container {
-            position: relative;
-        }
-
-        .copy-btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background-color: var(--bg);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            border-radius: 4px;
-            padding: 6px 12px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            font-family: var(--font-sans);
-            transition: all 0.2s ease;
-        }
-
-        .copy-btn:hover {
-            border-color: var(--accent);
-            color: var(--text);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
         }
 
         /* Limits Section */
         .limits {
-            padding: 80px 0;
+            padding: 60px 0;
             border-top: 1px solid var(--border);
         }
 
         .limits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-            margin-top: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
         }
 
         .limit-item {
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px;
+            border-radius: 6px;
+            padding: 20px;
             text-align: center;
-            background-color: rgba(27, 29, 32, 0.4);
+            background-color: rgba(27, 29, 32, 0.2);
         }
 
         .limit-value {
             font-family: var(--font-mono);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
             color: var(--accent);
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .limit-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
 
         /* Footer */
         footer {
             border-top: 1px solid var(--border);
-            padding: 60px 0;
-            background-color: rgba(0, 0, 0, 0.2);
+            padding: 48px 0;
+            background-color: rgba(0, 0, 0, 0.15);
             margin-top: auto;
         }
 
         .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            align-items: flex-start;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
         }
 
         .footer-brand {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 8px;
         }
 
         .footer-links {
             display: flex;
-            justify-content: flex-end;
-            gap: 48px;
+            gap: 24px;
         }
 
-        .footer-col h4 {
-            font-size: 0.85rem;
-            color: var(--text);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 16px;
-            font-family: var(--font-mono);
-        }
-
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .footer-col a {
+        .footer-links a {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        .footer-col a:hover {
+        .footer-links a:hover {
             color: var(--text);
         }
 
         .footer-bottom {
-            margin-top: 48px;
-            padding-top: 24px;
+            margin-top: 32px;
+            padding-top: 20px;
             border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -671,25 +548,14 @@
         }
 
         /* Responsive Utilities */
-        @media (max-width: 968px) {
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 60px 0;
-            }
-
+        @media (max-width: 800px) {
             .playground-container {
                 grid-template-columns: 1fr;
-                padding: 24px;
             }
 
             .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-
-            .footer-links {
-                justify-content: flex-start;
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
 
@@ -699,15 +565,7 @@
             }
 
             .hero-title {
-                font-size: 2.3rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-            }
-
-            .format-selector {
-                grid-template-columns: repeat(2, 1fr);
+                font-size: 2rem;
             }
 
             .footer-bottom {
@@ -725,8 +583,7 @@
         <div class="container nav-container">
             <div class="brand-group">
                 <a href="#" class="logo">
-                    <!-- Standard clean vector logo mark representing streamlined structure -->
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                     </svg>
                     Lumanu
@@ -738,9 +595,9 @@
             <nav class="nav-links">
                 <a href="#playground" class="nav-link">Playground</a>
                 <a href="#features" class="nav-link">Features</a>
-                <a href="#api-docs" class="nav-link">API</a>
+                <a href="https://lumanu.mcbcode.com/docs/" class="nav-link">Docs</a>
                 <a href="https://github.com/xyztoast/lumanu" target="_blank" rel="noopener noreferrer" class="nav-link" style="display: flex; align-items: center; gap: 6px;">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                     </svg>
                     GitHub
@@ -754,46 +611,38 @@
 
         <!-- Hero Section -->
         <section class="container hero">
-            <div class="hero-content">
-                <div class="badge">
-                    <span>v1.0.0 Stable</span>
-                </div>
-                <h1 class="hero-title">
-                    Lumanu
-                    <span>Readable text from any webpage.</span>
-                </h1>
-                <p class="hero-description">
-                    Extract clean, readable, AI-ready text from websites, raw files, documentation, and more. Built specifically for developers, scrapers, and large language model contexts.
-                </p>
-                <div class="hero-actions">
-                    <a href="#playground" class="btn btn-primary">Try Playground</a>
-                    <a href="https://github.com/xyztoast/lumanu" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: middle;">
-                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                        </svg>
-                        GitHub Repository
-                    </a>
-                </div>
+            <h1 class="hero-title">
+                Lumanu
+                <span>Readable text from any webpage.</span>
+            </h1>
+            <p class="hero-description">
+                Extract clean, AI-ready text from websites, raw files, and documentation. Built for developers, web scrapers, and LLM applications.
+            </p>
+            <div class="hero-actions">
+                <a href="https://lumanu.mcbcode.com/docs/" class="btn btn-primary">Read Docs</a>
+                <a href="https://github.com/xyztoast/lumanu" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    GitHub
+                </a>
             </div>
 
-            <!-- Terminal Showcase Window -->
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-controls">
-                        <div class="terminal-dot"></div>
-                        <div class="terminal-dot"></div>
-                        <div class="terminal-dot"></div>
+            <!-- Crisp, straight-to-the-point payload visual -->
+            <div class="hero-preview">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                        </div>
+                        <span class="terminal-title">GET /extract</span>
                     </div>
-                    <span class="terminal-title">bash — request.sh</span>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-line"><span class="terminal-prompt">$</span> curl "https://lumanu.mcbcode.com/extract?url=https://example.com"</div>
-                    <div class="terminal-line terminal-success">HTTP/1.1 200 OK</div>
-                    <div class="terminal-line" style="color: #6ee7b7;">{</div>
-                    <div class="terminal-line" style="color: #6ee7b7;">  "success": <span style="color: #f472b6;">true</span>,</div>
-                    <div class="terminal-line" style="color: #6ee7b7;">  "url": <span style="color: #a7f3d0;">"https://example.com"</span>,</div>
-                    <div class="terminal-line" style="color: #6ee7b7;">  "text": <span style="color: #93c5fd;">"Example Domain. This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination..."</span></div>
-                    <div class="terminal-line" style="color: #6ee7b7;">}</div>
+                    <div class="terminal-body">
+                        <div class="terminal-line"><span class="terminal-prompt">$</span> curl "https://lumanu.mcbcode.com/extract?url=https://example.com"</div>
+                        <div class="terminal-line" style="color: #6ee7b7; margin-top: 8px;">{</div>
+                        <div class="terminal-line" style="color: #6ee7b7;">  "success": true,</div>
+                        <div class="terminal-line" style="color: #6ee7b7;">  "text": "Example Domain. This page is for use in illustrative examples..."</div>
+                        <div class="terminal-line" style="color: #6ee7b7;">}</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -802,64 +651,24 @@
         <section id="features" class="features">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-subtitle">Core Infrastructure</span>
-                    <h2 class="section-title">Designed for modern pipelines</h2>
+                    <h2 class="section-title">What is Lumanu?</h2>
+                    <p>A simple edge-utility to convert bloated web markup into clean content blocks.</p>
                 </div>
                 
                 <div class="features-grid">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                                <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                                <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                            </svg>
-                        </div>
-                        <h3>HTTP & HTTPS</h3>
-                        <p>Fully compliant source scraping. Support all standard HTML webpages, raw developer code repository files, and complex sub-document locations.</p>
+                        <h3>Clean Text & MD</h3>
+                        <p>Automatically filters out CSS sheets, layout scripts, headers, dynamic navigation menus, and yields clean developer-oriented plain text or markdown structures.</p>
                     </div>
 
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <polyline points="4 17 10 11 4 5"></polyline>
-                                <line x1="12" y1="19" x2="20" y2="19"></line>
-                            </svg>
-                        </div>
-                        <h3>HTML Cleanup</h3>
-                        <p>Automatically eliminates heavy stylesheets, deep scripts, advertisement elements, trackers, navigation menus, and yields clean developer-oriented markup outputs.</p>
+                        <h3>Perfect LLM Context</h3>
+                        <p>Saves tokens and reduces noise. Web pages are converted into clean markup blocks optimized directly for ingestion into vector databases and embedding pipelines.</p>
                     </div>
 
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                        </div>
-                        <h3>Multiple URLs</h3>
-                        <p>Execute parallel background extraction across up to 100 remote web paths in a single API query window, enabling high-performance workflows.</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                            </svg>
-                        </div>
-                        <h3>High Performance</h3>
-                        <p>Extremely light, responsive runtime execution completely routed through low-latency Cloudflare Workers edge server configurations closer to targets.</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            </svg>
-                        </div>
-                        <h3>Fully Open Source</h3>
-                        <p>Never lock yourself to third-party subscription frameworks. Read, scale, audit, fork, and self-host the clean extraction script freely on GitHub.</p>
+                        <h3>Built on Workers</h3>
+                        <p>Powered by Cloudflare Workers at the edge. Highly responsive, minimal overhead routing, and extremely fast network connections close to target systems.</p>
                     </div>
                 </div>
             </div>
@@ -869,24 +678,20 @@
         <section id="playground" class="playground">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-subtitle">Interactive Environment</span>
-                    <h2 class="section-title">See extraction live</h2>
+                    <h2 class="section-title">Interactive Sandbox</h2>
+                    <p>Test out the parser manually. Input a target URL to simulate real-time text extraction.</p>
                 </div>
 
                 <div class="playground-container">
                     <!-- Controls -->
                     <div class="playground-controls">
-                        <p class="playground-description">
-                            Test out our robust parsing system manually below. Type any sample HTTP target and select your preferred schema target.
-                        </p>
-                        
                         <div class="input-group">
-                            <label class="input-label" for="target-url">Source Webpage URL</label>
+                            <label class="input-label" for="target-url">Source URL</label>
                             <input type="url" id="target-url" class="text-input" placeholder="https://example.com" value="https://example.com">
                         </div>
 
                         <div class="input-group">
-                            <label class="input-label">Output Data Formatting</label>
+                            <label class="input-label">Output Format</label>
                             <div class="format-selector">
                                 <button type="button" class="format-btn active" onclick="setPlaygroundFormat('JSON')">JSON</button>
                                 <button type="button" class="format-btn" onclick="setPlaygroundFormat('TEXT')">TEXT</button>
@@ -896,12 +701,7 @@
                         </div>
 
                         <button type="button" id="btn-extract" class="btn btn-primary playground-btn" onclick="runExtraction()">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="17 8 12 3 7 8"></polyline>
-                                <line x1="12" y1="3" x2="12" y2="15"></line>
-                            </svg>
-                            Run Extraction
+                            Extract Content
                         </button>
                     </div>
 
@@ -914,75 +714,10 @@
                                     <div class="terminal-dot"></div>
                                     <div class="terminal-dot"></div>
                                 </div>
-                                <span class="terminal-title">extracted_content.<span id="output-ext">json</span></span>
+                                <span class="terminal-title">output.<span id="output-ext">json</span></span>
                             </div>
                             <div class="terminal-body" id="playground-terminal">
-                                <span style="color: var(--text-secondary);">Ready. Input a URL on the left and click "Run Extraction" to run simulation or live fetch...</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- API Examples Section -->
-        <section id="api-docs" class="api-examples">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-subtitle">Integration Blueprint</span>
-                    <h2 class="section-title">Drop into any codebase</h2>
-                </div>
-
-                <div class="tabs">
-                    <button class="tab-btn active" onclick="switchTab(event, 'curl')">cURL</button>
-                    <button class="tab-btn" onclick="switchTab(event, 'javascript')">JavaScript</button>
-                    <button class="tab-btn" onclick="switchTab(event, 'python')">Python</button>
-                </div>
-
-                <div class="code-container">
-                    <button class="copy-btn" onclick="copySnippet()">Copy Snippet</button>
-
-                    <!-- cURL Tab -->
-                    <div id="tab-curl" class="tab-content active">
-                        <div class="terminal">
-                            <div class="terminal-body" style="min-height: auto;">
-                                <span class="terminal-prompt">$</span> <span style="color: var(--accent);">curl</span> "https://lumanu.mcbcode.com/extract?url=https://example.com" \
-  -H "Accept: application/json"
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- JS Tab -->
-                    <div id="tab-javascript" class="tab-content">
-                        <div class="terminal">
-                            <div class="terminal-body" style="min-height: auto;">
-                                <span style="color: var(--accent);">const</span> url = <span style="color: #a7f3d0;">"https://lumanu.mcbcode.com/extract?url=https://example.com"</span>;
-
-<span style="color: var(--accent);">const</span> response = <span style="color: var(--accent);">await</span> <span style="color: #93c5fd;">fetch</span>(url);
-<span style="color: var(--accent);">const</span> data = <span style="color: var(--accent);">await</span> response.<span style="color: #93c5fd;">json</span>();
-
-<span style="color: #9ca3af;">// Access structured readable text ready for your AI LLM context</span>
-console.<span style="color: #93c5fd;">log</span>(data.text);
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Python Tab -->
-                    <div id="tab-python" class="tab-content">
-                        <div class="terminal">
-                            <div class="terminal-body" style="min-height: auto;">
-                                <span style="color: var(--accent);">import</span> requests
-
-api_url = <span style="color: #a7f3d0;">"https://lumanu.mcbcode.com/extract"</span>
-params = {
-    <span style="color: #a7f3d0;">"url"</span>: <span style="color: #a7f3d0;">"https://example.com"</span>
-}
-
-response = requests.<span style="color: #93c5fd;">get</span>(api_url, params=params)
-data = response.<span style="color: #93c5fd;">json</span>()
-
-<span style="color: #9ca3af;"># Output purified webpage text</span>
-<span style="color: var(--accent);">print</span>(data[<span style="color: #a7f3d0;">"text"</span>])
+                                <span style="color: var(--text-secondary);">Ready. Input a URL and click "Extract Content" to run the parser.</span>
                             </div>
                         </div>
                     </div>
@@ -994,26 +729,21 @@ data = response.<span style="color: #93c5fd;">json</span>()
         <section class="limits">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-subtitle">Platform Boundaries</span>
-                    <h2 class="section-title">Generous execution limits</h2>
+                    <h2 class="section-title">Execution Boundaries</h2>
                 </div>
 
                 <div class="limits-grid">
                     <div class="limit-item">
                         <div class="limit-value">100</div>
-                        <div class="limit-label">Max URLs per batch request</div>
+                        <div class="limit-label">Max URLs per batch</div>
                     </div>
                     <div class="limit-item">
                         <div class="limit-value">5 MB</div>
-                        <div class="limit-label">Maximum file size parsed</div>
+                        <div class="limit-label">Maximum target size</div>
                     </div>
                     <div class="limit-item">
                         <div class="limit-value">30s</div>
-                        <div class="limit-label">Source HTTP connection timeout</div>
-                    </div>
-                    <div class="limit-item">
-                        <div class="limit-value">SSL</div>
-                        <div class="limit-label">HTTPS fully encrypted routing</div>
+                        <div class="limit-label">Connection timeout</div>
                     </div>
                 </div>
             </div>
@@ -1027,30 +757,21 @@ data = response.<span style="color: #93c5fd;">json</span>()
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="logo">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                         </svg>
                         Lumanu
                     </div>
-                    <p style="max-width: 320px;">
-                        Extract clean, raw, formatted web page text content quickly. Self-hostable, low resource footprint.
-                    </p>
                 </div>
                 <div class="footer-links">
-                    <div class="footer-col">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="https://github.com/xyztoast/lumanu" target="_blank" rel="noopener noreferrer">GitHub Project</a></li>
-                            <li><a href="https://lumanu.mcbcode.com/health" target="_blank" rel="noopener noreferrer">Health Diagnostics</a></li>
-                            <li><a href="#playground">Interactive Sandbox</a></li>
-                        </ul>
-                    </div>
+                    <a href="https://lumanu.mcbcode.com/docs/">Documentation</a>
+                    <a href="https://github.com/xyztoast/lumanu" target="_blank" rel="noopener noreferrer">GitHub Project</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div>&copy; 2026 Lumanu Community Project. MIT Licensed.</div>
-                <div style="font-family: var(--font-mono); color: var(--accent);">
-                    Built because raw HTML is terrible context for AI.
+                <div>&copy; 2026 Lumanu Community Project. Open-source developer tool.</div>
+                <div style="font-family: var(--font-mono); color: var(--accent); font-size: 0.75rem;">
+                    HTML is terrible context for LLMs.
                 </div>
             </div>
         </div>
@@ -1058,85 +779,33 @@ data = response.<span style="color: #93c5fd;">json</span>()
 
     <!-- Scripts / Interactivity -->
     <script>
-        // Track playground preferences
         let currentFormat = 'JSON';
 
-        // Check health of the actual system on page load
+        // Robust checking state bypasses browser sandbox CORS blockers utilizing mode: 'no-cors'
         window.addEventListener('DOMContentLoaded', async () => {
             const statusIndicator = document.getElementById('api-status');
             
             try {
-                // Set checking state explicitly
                 statusIndicator.className = 'status-indicator status-checking';
                 statusIndicator.innerText = '● Checking';
 
-                // Real status health endpoint fetch request
-                const response = await fetch('https://lumanu.mcbcode.com/health');
+                // Use no-cors to check server reachability without throwing CORS errors in local contexts
+                await fetch('https://lumanu.mcbcode.com/health', { mode: 'no-cors' });
                 
-                if (response.ok) {
-                    statusIndicator.className = 'status-indicator status-reachable';
-                    statusIndicator.innerText = '● API Reachable';
-                } else {
-                    statusIndicator.className = 'status-indicator status-unreachable';
-                    statusIndicator.innerText = '● API Unreachable';
-                }
+                statusIndicator.className = 'status-indicator status-reachable';
+                statusIndicator.innerText = '● API Reachable';
             } catch (error) {
-                // Fallback state on offline/network blockage
+                // If the fetch fails to connect completely (such as being offline)
                 statusIndicator.className = 'status-indicator status-unreachable';
                 statusIndicator.innerText = '● API Unreachable';
                 console.warn('API health check fetch failed:', error);
             }
         });
 
-        // Toggle code snippets
-        function switchTab(event, targetTabId) {
-            // Remove active classes
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            // Set current active values
-            event.currentTarget.classList.add('active');
-            document.getElementById(`tab-${targetTabId}`).classList.add('active');
-        }
-
-        // Copy active script block to clipboard safely
-        function copySnippet() {
-            // Locate visible tab content segment
-            const activeTabContent = document.querySelector('.tab-content.active');
-            if (!activeTabContent) return;
-
-            const textToCopy = activeTabContent.innerText.trim();
-
-            // Using fallback document.execCommand approach for optimal frame compatibilities
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            textarea.style.position = 'fixed'; // Avoid page scrolling
-            document.body.appendChild(textarea);
-            textarea.select();
-            
-            try {
-                document.execCommand('copy');
-                const copyBtn = document.querySelector('.copy-btn');
-                const originalText = copyBtn.innerText;
-                copyBtn.innerText = 'Copied!';
-                setTimeout(() => {
-                    copyBtn.innerText = originalText;
-                }, 1500);
-            } catch (err) {
-                console.error('Could not copy text: ', err);
-            }
-            
-            document.body.removeChild(textarea);
-        }
-
         // Update active playground output option label
         function setPlaygroundFormat(format) {
             currentFormat = format;
             
-            // Adjust indicator tabs
             const formatButtons = document.querySelectorAll('.format-btn');
             formatButtons.forEach(btn => {
                 if (btn.innerText === format || (format === 'MARKDOWN' && btn.innerText === 'MD')) {
@@ -1146,7 +815,6 @@ data = response.<span style="color: #93c5fd;">json</span>()
                 }
             });
 
-            // Adjust window extension display
             const extSpan = document.getElementById('output-ext');
             extSpan.innerText = format.toLowerCase();
         }
@@ -1158,19 +826,16 @@ data = response.<span style="color: #93c5fd;">json</span>()
             const extractBtn = document.getElementById('btn-extract');
             const targetUrl = urlInput.value.trim() || 'https://example.com';
 
-            // Show loading simulation sequence inside the terminal block
-            terminal.innerHTML = `<span style="color: var(--accent);">Connecting to extraction node...</span>\n<span style="color: var(--warning);">GET ${targetUrl} [Connecting]</span>`;
+            terminal.innerHTML = `<span style="color: var(--accent);">Connecting to node...</span>\n<span style="color: var(--warning);">GET ${targetUrl} [Connecting]</span>`;
             extractBtn.disabled = true;
             extractBtn.innerText = 'Extracting...';
 
-            // Parse clean domain visual outputs for rich simulated rendering
             let parsedDomain = 'example.com';
             try {
                 const domainObj = new URL(targetUrl);
                 parsedDomain = domainObj.hostname;
             } catch(e) {}
 
-            // Delay simulating high-performance worker scraping action
             setTimeout(() => {
                 let simulatedOutput = '';
 
@@ -1178,52 +843,35 @@ data = response.<span style="color: #93c5fd;">json</span>()
                     simulatedOutput = `{
   <span style="color: #6ee7b7;">"success"</span>: <span style="color: #f472b6;">true</span>,
   <span style="color: #6ee7b7;">"url"</span>: <span style="color: #a7f3d0;">"${targetUrl}"</span>,
-  <span style="color: #6ee7b7;">"source"</span>: <span style="color: #a7f3d0;">"HTML Parser Edge v1"</span>,
   <span style="color: #6ee7b7;">"metadata"</span>: {
-    <span style="color: #6ee7b7;">"title"</span>: <span style="color: #a7f3d0;">"Purified site results - ${parsedDomain}"</span>,
-    <span style="color: #6ee7b7;">"wordCount"</span>: <span style="color: #f472b6;">156</span>
+    <span style="color: #6ee7b7;">"title"</span>: <span style="color: #a7f3d0;">"${parsedDomain} Content"</span>
   },
   <span style="color: #6ee7b7;">"text"</span>: <span style="color: #93c5fd;">"Lumanu Engine Extraction succeeded. Output successfully filtered from visual layers and CSS trackers. Source HTML was stripped down to structural textual blocks to support rapid ingestion into AI pipelines, vector stores, embeddings, and chat contexts."</span>
 }`;
                 } else if (currentFormat === 'TEXT') {
                     simulatedOutput = `Lumanu Pure Text Result:
 ------------------------------------------
-Domain Context: ${parsedDomain}
 URL Target: ${targetUrl}
 
-Extracted main layout article elements.
-Removed header layouts, global navigation lists, footer copyright notices, script modules, and styles sheets.
-
-Content block details:
 Lumanu Engine Extraction succeeded. Output successfully filtered from visual layers and CSS trackers. Source HTML was stripped down to structural textual blocks to support rapid ingestion into AI pipelines, vector stores, embeddings, and chat contexts.`;
                 } else if (currentFormat === 'MARKDOWN') {
                     simulatedOutput = `# Extracted Content: ${parsedDomain}
 
 > Parsed cleanly from: \`${targetUrl}\`
 
-## Extraction Successfully Completed
 Lumanu Engine Extraction succeeded. Output successfully filtered from visual layers and CSS trackers. Source HTML was stripped down to structural textual blocks to support rapid ingestion into AI pipelines, vector stores, embeddings, and chat contexts.`;
                 } else if (currentFormat === 'YAML') {
                     simulatedOutput = `<span style="color: #6ee7b7;">status</span>: success
 <span style="color: #6ee7b7;">source_url</span>: "${targetUrl}"
-<span style="color: #6ee7b7;">engine</span>: lumanu_worker_v1
 <span style="color: #6ee7b7;">data</span>:
   <span style="color: #6ee7b7;">extracted_content</span>: |
     Lumanu Engine Extraction succeeded. Output successfully filtered from visual layers and CSS trackers. Source HTML was stripped down to structural textual blocks to support rapid ingestion into AI pipelines, vector stores, embeddings, and chat contexts.`;
                 }
 
-                // Append and restore
                 terminal.innerHTML = simulatedOutput;
                 extractBtn.disabled = false;
-                extractBtn.innerHTML = `
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                    </svg>
-                    Run Extraction
-                `;
-            }, 1200);
+                extractBtn.innerText = 'Extract Content';
+            }, 800);
         }
     </script>
 </body>
