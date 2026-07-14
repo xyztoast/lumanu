@@ -6,7 +6,7 @@
     <title>Lumanu Documentation — Developer API Reference</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Lumanu API Documentation. Learn how to convert web URLs into clean, readable Markdown and JSON formats optimized for AI context pipelines.">
+    <meta name="description" content="Lumanu API Documentation. Learn how to convert web URLs into clean, readable Markdown, YAML, and JSON formats optimized for AI context pipelines.">
     <meta name="author" content="Lumanu">
 
     <!-- Google Fonts -->
@@ -249,10 +249,20 @@
             max-width: 820px;
         }
 
-        /* Markdown-styled elements */
+        /* Multi-page Routing Section setup */
         section {
-            margin-bottom: 64px;
-            scroll-margin-top: 90px; /* Offset for sticky header navigation spacing */
+            display: none; /* Hidden by default; router toggles active section */
+            margin-bottom: 48px;
+        }
+
+        section.active {
+            display: block;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         section h1 {
@@ -283,6 +293,58 @@
             line-height: 1.7;
             color: var(--text-secondary);
             margin-bottom: 16px;
+        }
+
+        /* Doc Navigation Footer (Next/Prev Buttons) */
+        .doc-pagination {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .pagination-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 16px;
+            background-color: rgba(27, 29, 32, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .pagination-btn:hover {
+            border-color: var(--border-hover);
+            background-color: rgba(27, 29, 32, 0.7);
+        }
+
+        .pagination-btn.prev {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .pagination-btn.next {
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .pagination-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
+
+        .pagination-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--accent);
         }
 
         /* Parameters Table styling */
@@ -453,17 +515,17 @@
             <!-- Group 1: Getting Started -->
             <section id="introduction" data-title="Introduction" data-group="Getting Started">
                 <h1>API Overview</h1>
-                <p>Welcome to Lumanu, a modern and fast text extraction utility designed specifically for AI and large language model applications. Most public websites are designed to look great to human users, filled with structural menus, advertising trackers, stylesheets, and scripting structures. When sent directly to LLMs, this introduces severe context inflation, raising your token usage costs and introducing unnecessary noise that degrades logic processing accuracy.</p>
-                <p>Lumanu runs high-performance extraction microservices right at the edge network (powered by Cloudflare Workers) to fetch webpages, clean up HTML layers, and provide neat, structurally-correct markdown output instantly.</p>
+                <p>Welcome to Lumanu, an AI-first web content extraction utility designed specifically for large language model applications. Most public websites are built for visual layout presentation, introducing excessive noise like cookies, layout grids, advertisement pixels, scripting trackers, and presentation styling. When loaded into prompt workflows, these elements lead to severe token bloat and dilute context accuracy.</p>
+                <p>Lumanu runs high-performance extraction microservices directly at the edge to fetch web resources, strip out layout noise, cleanly serialize structural tables, and instantly deliver clean plain-text, JSON, YAML, or Markdown content blocks.</p>
                 
                 <div class="info-box">
-                    <p><strong>Note:</strong> Lumanu's endpoint is completely public and open for general developer usage at <code>https://lumanu.mcbcode.com</code>.</p>
+                    <p><strong>Self-Hosting First:</strong> Lumanu is built to run easily on a single-file template configuration, allowing direct paste-in integration into a Cloudflare Workers dashboard without a local node environment or terminal build steps.</p>
                 </div>
             </section>
 
             <section id="quickstart" data-title="Quickstart" data-group="Getting Started">
                 <h2>Quickstart with cURL</h2>
-                <p>To run your very first webpage text extraction, you can query our global extract endpoint directly from your terminal workspace using cURL.</p>
+                <p>Use the global gateway to fetch and parse any remote webpage from your local developer terminal in seconds:</p>
                 
                 <div class="code-block">
                     <div class="code-block-header">
@@ -471,18 +533,18 @@
                     </div>
                     <div class="code-block-content"><span class="terminal-prompt">$</span> curl "https://lumanu.mcbcode.com/extract?url=https://example.com"</div>
                 </div>
-                <p>This outputs a JSON response containing metadata about the target webpage and the extracted clean text content block.</p>
+                <p>By default, this endpoint generates a structured JSON response containing the success status, metadata details, and the cleaned output.</p>
             </section>
 
             <!-- Group 2: API Reference -->
-            <section id="extract-endpoint" data-title="Extract Endpoint" data-group="API Reference">
+            <section id="get-extract" data-title="GET /extract" data-group="API Reference">
                 <h2>GET /extract</h2>
-                <p>Our main interface for fetching and cleaning webpages. You communicate with this endpoint by appending URL variables via structured GET query parameters.</p>
+                <p>Retrieves and strips down text from a single webpage using simple URL query variables.</p>
                 
                 <table class="doc-table">
                     <thead>
                         <tr>
-                            <th>Parameter</th>
+                            <th>Query Parameter</th>
                             <th>Type</th>
                             <th>Requirement</th>
                             <th>Description</th>
@@ -493,86 +555,277 @@
                             <td><code>url</code></td>
                             <td>String</td>
                             <td>Required</td>
-                            <td>The target webpage address to fetch (e.g., <code>https://example.com</code>). Make sure it includes the protocol prefix.</td>
+                            <td>Target webpage address to extract (e.g., <code>https://example.com</code>). Must include valid <code>http:</code> or <code>https:</code> protocol prefixes.</td>
                         </tr>
                         <tr>
                             <td><code>format</code></td>
                             <td>String</td>
                             <td>Optional</td>
-                            <td>Desired output formatting. Choices include: <code>json</code>, <code>text</code>, <code>markdown</code>, <code>yaml</code>. Defaults to <code>json</code>.</td>
+                            <td>Specifies structural representation. Options: <code>json</code>, <code>text</code>, <code>markdown</code>, <code>yaml</code>. Defaults to <code>json</code>.</td>
                         </tr>
                     </tbody>
                 </table>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-lang">Example Request</span>
+                    </div>
+                    <div class="code-block-content"><span class="terminal-prompt">$</span> curl "https://lumanu.mcbcode.com/extract?url=https://example.com&format=markdown"</div>
+                </div>
             </section>
 
-            <section id="response-format" data-title="Response Format" data-group="API Reference">
-                <h2>Response Format</h2>
-                <p>When requesting data in standard JSON format, you can expect a flat, reliable JSON schema structured as follows:</p>
+            <section id="post-extract" data-title="POST /extract" data-group="API Reference">
+                <h2>POST /extract</h2>
+                <p>Allows bulk operations, letting you extract content from up to 100 URLs in parallel within a single request.</p>
+                
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>JSON Property</th>
+                            <th>Type</th>
+                            <th>Requirement</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>url</code></td>
+                            <td>String</td>
+                            <td>Optional</td>
+                            <td>Single target URL. (Takes precedence if <code>urls</code> array is not supplied).</td>
+                        </tr>
+                        <tr>
+                            <td><code>urls</code></td>
+                            <td>Array</td>
+                            <td>Optional</td>
+                            <td>Array of web targets (e.g., <code>["https://site-a.com", "https://site-b.com"]</code>). Max 100 targets.</td>
+                        </tr>
+                        <tr>
+                            <td><code>format</code></td>
+                            <td>String</td>
+                            <td>Optional</td>
+                            <td>Outputs formatting scheme: <code>json</code>, <code>text</code>, <code>markdown</code>, <code>yaml</code>. Defaults to <code>json</code>.</td>
+                        </tr>
+                    </tbody>
+                </table>
 
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-lang">Example Payload</span>
+                    </div>
+                    <div class="code-block-content">{
+  <span class="accent-text">"urls"</span>: [
+    <span class="string-text">"https://example.com/doc-1"</span>,
+    <span class="string-text">"https://example.com/doc-2"</span>
+  ],
+  <span class="accent-text">"format"</span>: <span class="string-text">"markdown"</span>
+}</div>
+                </div>
+            </section>
+
+            <section id="health" data-title="GET /health" data-group="API Reference">
+                <h2>GET /health</h2>
+                <p>A simple check endpoint used to monitor the status and uptime of the deployed Lumanu Worker instance.</p>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-lang">json</span>
+                    </div>
+                    <div class="code-block-content">{
+  <span class="accent-text">"status"</span>: <span class="string-text">"ok"</span>
+}</div>
+                </div>
+            </section>
+
+            <section id="serializers" data-title="Output Formats" data-group="API Reference">
+                <h2>Format Serializers</h2>
+                <p>Lumanu dynamically changes output formatting based on your requested parameter. Check out the specific schemas below:</p>
+
+                <h3>JSON</h3>
+                <p>Returns structured metadata alongside the extracted clean text.</p>
                 <div class="code-block">
                     <div class="code-block-header">
                         <span class="code-block-lang">json</span>
                     </div>
                     <div class="code-block-content">{
   <span class="accent-text">"success"</span>: <span class="number-text">true</span>,
-  <span class="accent-text">"url"</span>: <span class="string-text">"https://example.com"</span>,
-  <span class="accent-text">"metadata"</span>: {
-    <span class="accent-text">"title"</span>: <span class="string-text">"Example Domain"</span>
-  },
-  <span class="accent-text">"text"</span>: <span class="string-text">"This domain is for use in illustrative examples in documents..."</span>
+  <span class="accent-text">"count"</span>: <span class="number-text">1</span>,
+  <span class="accent-text">"results"</span>: [
+    {
+      <span class="accent-text">"url"</span>: <span class="string-text">"https://example.com"</span>,
+      <span class="accent-text">"status"</span>: <span class="number-text">200</span>,
+      <span class="accent-text">"success"</span>: <span class="number-text">true</span>,
+      <span class="accent-text">"contentType"</span>: <span class="string-text">"text/html; charset=UTF-8"</span>,
+      <span class="accent-text">"text"</span>: <span class="string-text">"Example content text block..."</span>,
+      <span class="accent-text">"length"</span>: <span class="number-text">1829</span>
+    }
+  ]
 }</div>
+                </div>
+
+                <h3>Plain Text</h3>
+                <p>Raw text outputs separated by explicit URL boundaries.</p>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-lang">text</span>
+                    </div>
+                    <div class="code-block-content">===== https://example.com =====
+
+Example page header content.
+Extracted main body layout cleanly.</div>
+                </div>
+
+                <h3>Markdown</h3>
+                <p>Clean structures organized under Markdown headers (<code>##</code>) for straightforward integration into LLM prompts.</p>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-lang">markdown</span>
+                    </div>
+                    <div class="code-block-content">## https://example.com
+
+Example page header content.
+Extracted main body layout cleanly.</div>
+                </div>
+
+                <h3>YAML</h3>
+                <p>Serialized cleanly using a dependency-free nested block scalar parser.</p>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-lang">yaml</span>
+                    </div>
+                    <div class="code-block-content">success: true
+count: 1
+results:
+  - url: "https://example.com"
+    status: 200
+    success: true
+    contentType: "text/html; charset=UTF-8"
+    text: |
+      Example page header content.
+      Extracted main body layout cleanly.</div>
                 </div>
             </section>
 
-            <!-- Group 3: Advanced Guides -->
-            <section id="llm-context" data-title="LLM Optimization" data-group="Advanced Guides">
-                <h2>LLM Token Optimization</h2>
-                <p>Webpages often contain thousands of lines of code. By extracting only raw text or markdown format, you remove massive CSS sheets and dynamic tracking script blocks. Here is how that impacts context windows:</p>
+            <!-- Group 3: Architecture & Security -->
+            <section id="security-ssrf" data-title="Security & SSRF" data-group="Architecture & Security">
+                <h2>Security & SSRF Protection</h2>
+                <p>To safely run an open, self-hosted proxy web parser, Lumanu includes built-in safeguards to prevent Server-Side Request Forgery (SSRF) and private network data leaks.</p>
+                
+                <h3>Blocking Private Networks</h3>
+                <p>Lumanu blocks requests targeting local loopbacks and internal subnets. The engine verifies hostname definitions and blocks them if they match standard local scopes:</p>
+                <ul>
+                    <li><strong>Loopbacks:</strong> <code>localhost</code>, <code>127.0.0.1</code>, <code>0.0.0.0</code>, <code>::1</code></li>
+                    <li><strong>IPv4 Private Blocks:</strong> <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code></li>
+                    <li><strong>IPv6 Link-Local Blocks:</strong> <code>fc00::</code>, <code>fd00::</code>, <code>fe80::</code></li>
+                </ul>
+
+                <h3>Redirect Policy</h3>
+                <p>To avoid security bypasses via redirect chains, Lumanu uses <code>redirect: "manual"</code>. Redirect responses (HTTP 3xx) are treated as explicit errors and are not followed.</p>
+            </section>
+
+            <section id="extraction-engine" data-title="Extraction Engine" data-group="Architecture & Security">
+                <h2>The Extraction Engine</h2>
+                <p>The parser runs a sequence of optimizations on fetched web pages to clean up messy HTML before returning the output:</p>
+                
+                <h3>1. Removing Boilerplate Tags</h3>
+                <p>Strips utility markup entirely, including the elements and any nested child contents inside:</p>
+                <p><code>script</code>, <code>style</code>, <code>noscript</code>, <code>nav</code>, <code>header</code>, <code>footer</code>, <code>iframe</code>, <code>svg</code>, <code>form</code></p>
+
+                <h3>2. Attribute Matching (Ads & Cookie Banners)</h3>
+                <p>Matches class and ID names against common patterns to strip typical boilerplate elements, including:</p>
+                <ul>
+                    <li>Cookie/consent banners (e.g., <code>cookie-consent</code>)</li>
+                    <li>Ad wrapper containers (e.g., <code>ad-banner</code>)</li>
+                    <li>Popup modals and sign-up prompts</li>
+                </ul>
+
+                <h3>3. Table-to-Markdown Conversions</h3>
+                <p>Converts HTML table grids into clean, pipe-delimited text blocks that preserve data relationships for AI logic engines:</p>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-lang">Output Preview</span>
+                    </div>
+                    <div class="code-block-content">Row Header 1 | Row Header 2
+Data Column 1 | Data Column 2</div>
+                </div>
+
+                <h3>4. Block Element Spacing</h3>
+                <p>Inserts clean break formatting around structural element boundaries (like <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;h1-h6&gt;</code>, and <code>&lt;blockquote&gt;</code>) to maintain readable vertical spacing.</p>
+            </section>
+
+            <section id="system-limits" data-title="Limits & Config" data-group="Architecture & Security">
+                <h2>System Limits & Configuration</h2>
+                <p>The core configuration values hardcoded in the Worker runtime include:</p>
                 
                 <table class="doc-table">
                     <thead>
                         <tr>
-                            <th>Page Resource</th>
-                            <th>Raw HTML Tokens</th>
-                            <th>Lumanu Markdown Tokens</th>
-                            <th>Savings</th>
+                            <th>Setting</th>
+                            <th>Value</th>
+                            <th>Purpose</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Standard documentation page</td>
-                            <td>~42,000</td>
-                            <td>~1,800</td>
-                            <td style="color: var(--success); font-weight: bold;">95.7% Reduction</td>
+                            <td><code>MAX_URLS</code></td>
+                            <td><code>100</code></td>
+                            <td>Maximum URLs allowed per batch request.</td>
                         </tr>
                         <tr>
-                            <td>Web log article</td>
-                            <td>~12,000</td>
-                            <td>~950</td>
-                            <td style="color: var(--success); font-weight: bold;">92.1% Reduction</td>
+                            <td><code>MAX_DOWNLOAD_BYTES</code></td>
+                            <td><code>5,242,880</code> (5 MB)</td>
+                            <td>Max network stream size read per request.</td>
+                        </tr>
+                        <tr>
+                            <td><code>TIMEOUT_MS</code></td>
+                            <td><code>30000</code> (30 seconds)</td>
+                            <td>Connection abort window for slow web targets.</td>
+                        </tr>
+                        <tr>
+                            <td><code>USER_AGENT</code></td>
+                            <td><code>Lumanu/1.0 (...)</code></td>
+                            <td>Bot header identification sent to origin servers.</td>
                         </tr>
                     </tbody>
                 </table>
-                <p>This severe compression allows you to feed deep website pages directly into LLMs without blowing past rate-limits or filling models with useless context garbage.</p>
             </section>
 
-            <section id="self-hosting" data-title="Self Hosting" data-group="Advanced Guides">
-                <h2>Self Hosting Lumanu</h2>
-                <p>Because Lumanu is completely open-source, you can easily self-host the deployment within your own private infrastructure. Check the root level repository layout for more detailed deployment directions:</p>
-                <p>To deploy the utility onto a local Cloudflare Worker environment, navigate to your terminal instance and run:</p>
+            <!-- Group 4: Deployment -->
+            <section id="deployment" data-title="Cloudflare Deploy" data-group="Deployment">
+                <h2>Cloudflare Worker Deployment</h2>
+                <p>Deploy Lumanu easily using Wrangler or straight through the Cloudflare web dashboard.</p>
+
+                <h3>Option A: Quick Edit (No Terminal)</h3>
+                <p>1. Log in to your Cloudflare Dashboard, navigate to <strong>Workers & Pages</strong>, and click <strong>Create Application</strong>.</p>
+                <p>2. Choose <strong>Create Worker</strong>, name it <code>lumanu</code>, and click <strong>Deploy</strong>.</p>
+                <p>3. Click <strong>Edit Code</strong>, paste your single-file Lumanu script into the dashboard editor, and click <strong>Save and Deploy</strong>.</p>
+
+                <h3>Option B: Command Line (Wrangler)</h3>
+                <p>Deploy using Wrangler from your local workspace terminal:</p>
                 
                 <div class="code-block">
                     <div class="code-block-header">
                         <span class="code-block-lang">bash</span>
                     </div>
-                    <div class="code-block-content"><span class="comment-text"># Clone code repository</span>
-<span class="terminal-prompt">$</span> git clone https://github.com/xyztoast/lumanu.git
-<span class="terminal-prompt">$</span> cd lumanu
+                    <div class="code-block-content"><span class="comment-text"># Initialize new wrangler layout context</span>
+<span class="terminal-prompt">$</span> npm install -g wrangler
+<span class="terminal-prompt">$</span> wrangler login
 
-<span class="comment-text"># Run wrangler deploy to push code directly to Cloudflare</span>
-<span class="terminal-prompt">$</span> npx wrangler deploy</div>
+<span class="comment-text"># Deploy the script to your active account edge</span>
+<span class="terminal-prompt">$</span> wrangler deploy app.js --name lumanu</div>
                 </div>
             </section>
+
+            <!-- Dynamic Pagination Block (Next / Previous Buttons) -->
+            <div class="doc-pagination">
+                <a href="#" id="prev-page" class="pagination-btn prev">
+                    <span class="pagination-label">Previous</span>
+                    <span class="pagination-title" id="prev-title">---</span>
+                </a>
+                <a href="#" id="next-page" class="pagination-btn next">
+                    <span class="pagination-label">Next</span>
+                    <span class="pagination-title" id="next-title">---</span>
+                </a>
+            </div>
 
         </main>
     </div>
@@ -590,30 +843,38 @@
                 await fetch('https://lumanu.mcbcode.com/health', { mode: 'no-cors' });
                 
                 statusIndicator.className = 'status-indicator status-reachable';
-                statusIndicator.innerText = '● API Reachable';
+                statusIndicator.innerText = '● API Online';
             } catch (error) {
                 statusIndicator.className = 'status-indicator status-unreachable';
-                statusIndicator.innerText = '● API Unreachable';
+                statusIndicator.innerText = '● API Not Online';
                 console.warn('API connection failed:', error);
             }
         });
 
-        // Dynamic Sidebar Generator & Auto-updating logic
+        // Dynamic Sidebar Generator & Multi-page routing logic
         const sections = Array.from(document.querySelectorAll('main section'));
         const sidebarNav = document.getElementById('sidebar-nav');
+        
+        // Active metadata state list for sequencing pagination
+        let routeSequence = [];
 
         function generateSidebar() {
             // Group our sections by their 'data-group' attribute
             const groups = {};
+            routeSequence = []; // reset
+
             sections.forEach(section => {
                 const groupName = section.getAttribute('data-group') || 'General';
+                const item = {
+                    id: section.id,
+                    title: section.getAttribute('data-title') || 'Untitled Section'
+                };
+
                 if (!groups[groupName]) {
                     groups[groupName] = [];
                 }
-                groups[groupName].push({
-                    id: section.id,
-                    title: section.getAttribute('data-title') || 'Untitled Section'
-                });
+                groups[groupName].push(item);
+                routeSequence.push(item);
             });
 
             // Clean previous renders
@@ -651,6 +912,74 @@
             });
         }
 
+        // Router handler function to only display active pages
+        function handleRouting() {
+            // Support modern paths like #introduction or /docs/introduction by stripping prefixes
+            const rawHash = window.location.hash || '#introduction';
+            let targetId = rawHash.replace('#', '');
+            
+            // Handle secondary routing representations such as #/docs/introduction
+            if (targetId.startsWith('/docs/')) {
+                targetId = targetId.replace('/docs/', '');
+            } else if (targetId.startsWith('/')) {
+                targetId = targetId.substring(1);
+            }
+
+            // Verify requested page actually exists, fallback to introduction if invalid
+            let activeIndex = routeSequence.findIndex(item => item.id === targetId);
+            if (activeIndex === -1) {
+                targetId = 'introduction';
+                activeIndex = 0;
+            }
+
+            // Hide all pages, display only the active selection
+            sections.forEach(section => {
+                if (section.id === targetId) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+
+            // Update highlighted state in sidebar dynamically
+            document.querySelectorAll('.sidebar-link-item').forEach(item => {
+                if (item.getAttribute('data-target-id') === targetId) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Handle bottom Next/Previous pagination visibility and links
+            const prevBtn = document.getElementById('prev-page');
+            const nextBtn = document.getElementById('next-page');
+            const prevTitle = document.getElementById('prev-title');
+            const nextTitle = document.getElementById('next-title');
+
+            // Previous button logic
+            if (activeIndex > 0) {
+                prevBtn.style.visibility = 'visible';
+                const prevItem = routeSequence[activeIndex - 1];
+                prevBtn.href = `#${prevItem.id}`;
+                prevTitle.innerText = prevItem.title;
+            } else {
+                prevBtn.style.visibility = 'hidden';
+            }
+
+            // Next button logic
+            if (activeIndex < routeSequence.length - 1) {
+                nextBtn.style.visibility = 'visible';
+                const nextItem = routeSequence[activeIndex + 1];
+                nextBtn.href = `#${nextItem.id}`;
+                nextTitle.innerText = nextItem.title;
+            } else {
+                nextBtn.style.visibility = 'hidden';
+            }
+
+            // Auto-scroll context main container pane back to top
+            window.scrollTo(0, 0);
+        }
+
         // Search/Filter function for sidebar
         function filterSidebar() {
             const query = document.getElementById('search').value.toLowerCase();
@@ -679,35 +1008,12 @@
             });
         }
 
-        // Scrollspy Navigation Tracking
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -60% 0px', // Trigger activation before reaching center of screen
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const activeId = entry.target.id;
-                    
-                    // Clear previous highlighted states
-                    document.querySelectorAll('.sidebar-link-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-
-                    // Highlight active target sidebar menu item
-                    const targetLinkItem = document.querySelector(`.sidebar-link-item[data-target-id="${activeId}"]`);
-                    if (targetLinkItem) {
-                        targetLinkItem.classList.add('active');
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Run Initial Setup
+        // Run Initialization and Register Router Listener 
         generateSidebar();
-        sections.forEach(section => observer.observe(section));
+        handleRouting();
+
+        // Listen for router movements
+        window.addEventListener('hashchange', handleRouting);
     </script>
 </body>
 </html>
