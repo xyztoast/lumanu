@@ -693,10 +693,10 @@
                         <div class="input-group">
                             <label class="input-label">Output Format</label>
                             <div class="format-selector">
-                                <button type="button" class="format-btn active" onclick="setPlaygroundFormat('JSON')">JSON</button>
-                                <button type="button" class="format-btn" onclick="setPlaygroundFormat('TEXT')">TEXT</button>
-                                <button type="button" class="format-btn" onclick="setPlaygroundFormat('MARKDOWN')">MD</button>
-                                <button type="button" class="format-btn" onclick="setPlaygroundFormat('YAML')">YAML</button>
+                                <button type="button" class="format-btn active" onclick="setPlaygroundFormat('JSON')">json</button>
+                                <button type="button" class="format-btn" onclick="setPlaygroundFormat('TEXT')">text</button>
+                                <button type="button" class="format-btn" onclick="setPlaygroundFormat('MARKDOWN')">markdown</button>
+                                <button type="button" class="format-btn" onclick="setPlaygroundFormat('YAML')">yaml</button>
                             </div>
                         </div>
 
@@ -793,11 +793,11 @@
                 await fetch('https://lumanu.mcbcode.com/health', { mode: 'no-cors' });
                 
                 statusIndicator.className = 'status-indicator status-reachable';
-                statusIndicator.innerText = '● API Reachable';
+                statusIndicator.innerText = '● API Online';
             } catch (error) {
                 // If the fetch fails to connect completely (such as being offline)
                 statusIndicator.className = 'status-indicator status-unreachable';
-                statusIndicator.innerText = '● API Unreachable';
+                statusIndicator.innerText = '● API Not Online';
                 console.warn('API health check fetch failed:', error);
             }
         });
